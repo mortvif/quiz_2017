@@ -231,6 +231,7 @@ exports.randomcheck  = function (req, res, next) {
     var result = answer.toLowerCase().trim() === req.quiz.answer.toLowerCase().trim();
 
     var puntuacion = req.session.respondidas.length - 1;
+
     if(result) {
         req.session.respondidas.push(req.quiz.id);
         puntuacion++;
