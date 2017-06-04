@@ -237,6 +237,7 @@ exports.randomcheck  = function (req, res, next) {
         puntuacion++;
     } else {
         req.session.respondidas = [-1];
+        puntuacion = 0;
     }
 
     res.render('quizzes/random_result', {
