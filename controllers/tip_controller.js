@@ -29,12 +29,24 @@ exports.checkPermision = function(req, res, next){
     var isAdmin  = req.session.user.isAdmin;
     var isAuthor = req.tip.AuthorId === req.session.user.id;
 
-    if (isAdmin || isAuthor) {
-        next();
-    } else {
-        console.log('Operación prohibida: El usuario logeado no es el autor del quiz, ni un administrador.');
-        res.send(403);
-    }
+    models.Quiz.findById(req.tip.QuizId)
+    .then(function (quiz){
+
+        var isQuizAuthor = (quiz.AuthorId === req.session.user.id);
+
+        if (isAdmin || isAuthor || isQuizAuthor) {
+            next();
+        } else {
+            console.log('Operación prohibida: El usuario logeado no es el autor del quiz, ni un administrador.');
+            res.send(403);
+        }
+
+    })
+    .catch(function(error){
+        next(error);
+    });
+
+
 };
 
 // GET /quizzes/:quizId/tips/new
