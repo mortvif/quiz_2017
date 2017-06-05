@@ -115,7 +115,7 @@ router.get('/quizzes/:quizId(\\d+)/play',
 router.get('/quizzes/:quizId(\\d+)/check',
     quizController.check);
 
-
+// Rutas tips
 router.get('/quizzes/:quizId(\\d+)/tips/new',
     sessionController.loginRequired,
     tipController.new);
@@ -128,6 +128,7 @@ router.put('/quizzes/:quizId(\\d+)/tips/:tipId(\\d+)/accept',
     tipController.accept);
 router.delete('/quizzes/:quizId(\\d+)/tips/:tipId(\\d+)',
     sessionController.loginRequired,
+    tipController.checkPermision,
     tipController.destroy);
 
 // Nuevas rutas de /quizzes random
