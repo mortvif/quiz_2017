@@ -261,6 +261,8 @@ exports.randomplay = function (req, res, next){
 // GET /quizzes/randomcheck/:quizId?answer=respuesta
 exports.randomcheck  = function (req, res, next) {
 
+    if (!req.session.respondidas) req.session.respondidas = [-1];
+
     var answer = req.query.answer || "";
 
     var result = answer.toLowerCase().trim() === req.quiz.answer.toLowerCase().trim();
